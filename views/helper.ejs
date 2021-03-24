@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKOA</title>
+    <!-- The King Of Ant -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/354885cafc.js" crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- jQuery -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- 우편번호 -->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@800&display=swap" rel="stylesheet">
+    <!-- start for html of javascript -->
+    <script>
+        $(document).ready(function(){
+            $('.question').click(function(){
+                $(this).next().slideToggle().siblings('.answer').slideUp();
+            });
+
+            $('#chat_start').click(function(){
+                $('.chat_service').toggle();
+            });
+
+            $('#mun').click(function(){
+                $('.chat_user').html('문의!');
+                setTimeout(()=>{
+                    $('.chat_ai_answer').html('평일 09:00 ~ 15:00까지 전화문의되며<br>혹은 redqoralsrl@naver.com으로 문의주세요!');
+                    $('#mun').attr('disabled',true);
+                    $('#ins').attr('disabled',true);
+                    $('#ref').attr('disabled',true);
+                    $('#err').attr('disabled',true);
+                    setTimeout(()=>{
+                        $('.chat_ai_answer2').html('<input type="button" id="resets" value="다시묻기">');
+                    },2000);
+                },2000);
+            });
+
+            $('#ins').click(function(){
+                $('.chat_user').html('입금!');
+                setTimeout(()=>{
+                    $('.chat_ai_answer').html('[마이페이지]->[돈입력]->[입금]을<br>누르시면 확인 후 입금됩니다!');
+                    $('#mun').attr('disabled',true);
+                    $('#ins').attr('disabled',true);
+                    $('#ref').attr('disabled',true);
+                    $('#err').attr('disabled',true);
+                    setTimeout(()=>{
+                        $('.chat_ai_answer2').html('<input type="button" id="resets" value="다시묻기">');
+                    },2000);
+                },2000);
+            });
+
+            $('#ref').click(function(){
+                $('.chat_user').html('환불!');
+                setTimeout(()=>{
+                    $('.chat_ai_answer').html('돈은 환불할 수가 없으며 입금과 출금만 가능합니다!<br>자세한 사항은 직접 문의주세요!');
+                    $('#mun').attr('disabled',true);
+                    $('#ins').attr('disabled',true);
+                    $('#ref').attr('disabled',true);
+                    $('#err').attr('disabled',true);
+                    setTimeout(()=>{
+                        $('.chat_ai_answer2').html('<input type="button" id="resets" value="다시묻기">');
+                    },2000);
+                },2000);
+            });
+
+            $('#err').click(function(){
+                $('.chat_user').html('오류!');
+                setTimeout(()=>{
+                    $('.chat_ai_answer').html('입금처리 오류는 신속히 계좌추적을 통해 하며<br>출금처리는 연결된 계좌에 입금되어 오류가 나지 않습니다!');
+                    $('#mun').attr('disabled',true);
+                    $('#ins').attr('disabled',true);
+                    $('#ref').attr('disabled',true);
+                    $('#err').attr('disabled',true);
+                    setTimeout(()=>{
+                        $('.chat_ai_answer2').html('<input type="button" id="resets" value="다시묻기">');
+                    },2000);
+                },2000);
+            });
+
+            $('.chat_ai_answer2').click(function(){
+                $('#mun').attr('disabled',false);
+                $('#ins').attr('disabled',false);
+                $('#ref').attr('disabled',false);
+                $('#err').attr('disabled',false);
+                $('.chat_user').text('');
+                $('.chat_ai_answer').text('');
+                $('.chat_ai_answer2').text('');
+                $('.chat_user').html('');
+                $('.chat_ai_answer').html('');
+                $('.chat_ai_answer2').html('');
+            });
+ 
+        });
+    </script>
+</head>
+<body>
+    <!-- pc recommend mobile -->
+    <div class="left_wrapper">
+        <div class="box"></div>
+        <div class="pc_only">
+            <div class="img_area">
+                <img src="/images/logobox.png" alt="TKOA로고">
+            </div>
+            <div class="img_people">
+                <img src="/images/anthalf.png" alt="ant">
+            </div>
+            <div class="title">
+                비상장주식 거래소<br>첫걸음
+                <p>트코아는<br>비상장 회사의<br>주식을 확보하여<br>주주가 될 수 있게 합니다.</p>
+                <p class="blue">트코아 웹사이트는 모바일 웹 환경으로 구성되었습니다!</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- mobile-area -->
+    <div class="right_wrapper">
+        <div class="right_title">
+            <div class="log">
+                <% if(logined == false){ %>
+                    <a href="/login" class="logs">로그인</a>
+                    <a href="/register" class="logs">회원가입</a>
+                    <% }else{ %>
+                    <span class="log22"><%= name %>님 환영합니다!</span><br><br>
+                    <a href="/mypage" class="logs">MyPage</a>
+                    <a href="/logout" class="logs">Logout</a>
+                    <% } %>
+            </div>
+            <div class="menubar">
+    
+                <div class="header_menu">
+                    <a href="/"><img src="/images/tkoa.png" alt=""></a>
+                </div>
+                <nav class="gnb_menu">
+                    <a href="/">홈</a>
+                    <a href="/jong">종목탐색</a>
+                    <a href="/gondong">종목토론</a>
+                    <a href="/helper">고객센터</a>
+                </nav>
+            </div>
+        </div>
+        
+        
+        <div class="body_right">
+            <div class="helper_page">
+                <div class="helper_title">Customer Service</div>
+                <div class="helper_accodian">트코아 F&Q</div>
+                <div class="qna_list">
+                    <h3 class="question">클럽딜에 참여하면 돈을 벌 수 있나요?</h3>
+                    <div class="answer">
+                        <p>TKOA 플랫폼에 개설된 ‘클럽딜‘은 [비상장주식에 대한 조합 형태의 공동투자] 서비스로, 수익이 담보되지 않으며 High Return, High Risk 투자입니다. 회사가 IPO를 하지 못하거나 다른 회사에 M&A되지 못할 경우 출자금 회수 시점이 무기한 지체될 수 있으며, 회사의 실적이 좋지 않거나 추가 투자유치가 되지 않는 경우 등에는 출자금 회수가 불가능할 수도 있습니다. 투자에 대한 의사 결정 및 책임은 투자자의 개인적인 판단에 있으며 투자 전에 반드시 재무전문가, 법률전문가 등 전문가의 조언을 받을 것을 권해 드립니다.</p>
+                    </div>
+                    <h3 class="question">개인의 조합 참여 최소 금액은 얼마인가요?</h3>
+                    <div class="answer">
+                        <p>조합별로 리드엔젤이 정하는 바에 따라 다릅니다</p>
+                    </div>
+                    <h3 class="question">출자금 회수는 어떻게 하나요?</h3>
+                    <div class="answer">
+                        <p>일반적으로는 IPO나 M&A를 기준으로 회수를 기대할 수 있지만 비상장주식의 특성상 유동성이 작아 회수가 어려울 가능성도 있습니다. 하지만, 리드엔젤이 좋은 조건을 만들 경우, IPO나 M&A 이전에도 회수가 가능할 수도 있습니다.</p>
+                    </div>
+                    <h3 class="question">서비스 비용은 얼마인가요?</h3>
+                    <div class="answer">
+                        <p>TKOA는 조합설립 및 관리 감시를 위한 비용을 수취합니다. 수익이 발생하면 리드엔젤은 성과보수로 수익의 일부를 보상 받습니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat_bot_bt">
+                <input type="button" id="chat_start" class='btn3' value="챗봇 시작하기">
+                <!-- <input type="button" class='btn3' value="고객센터 문의하기"> -->
+            </div>
+
+            <div class="chat_service">
+                <div class="chat_service_title">TKOA AI</div>
+                <div class="chat_service_body">
+                    <div class="chat_ai">
+                        <span id='ai_ta'><img src="/images/anthalf.png"></span>
+                        <input type="button" id="mun" value="문의">
+                        <input type="button" id="ins" value="입금">
+                        <input type="button" id="ref" value="환불">
+                        <input type="button" id="err" value="오류">
+                    </div>
+                    <div class="chat_user"></div>
+                    <div class="chat_ai_answer"></div>
+                    <div class="chat_ai_answer2"></div>
+                </div>
+                <div class="chat_service_doing">
+                    <div class="chat_ai_talking">원하시는 문의를 클릭해주세요</div>
+                </div>
+            </div>
+        </div><!--body_right-->
+
+    </div><!--right_wrapper-->
+
+    <!-- javascript -->
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+// 사용자 데이터베이스
+
+// db1
+// 아이디 이름 패스워드 나이 주소 돈
+create table userdb(
+    id varchar(20) not null primary key,
+    name varchar(20) not null,
+    pw varchar(300) not null,
+    address varchar(200) not null,
+    money bigint(8) unsigned default 1000
+);
+
+// db2
+// 뉴스
+// 만들때 미리 2개 데이터 임의로 넣기
+create table news(
+    num int(10) not null primary key,
+    news varchar(300) not null,
+    href varchar(300) not null
+);
+
+// db3
+// 입출금내역 지갑 // 주식 매수 지갑
+create table wallet(
+    num bigint(8) unsigned not null auto_increment primary key,
+    name varchar(20) not null,
+    money_history bigint(8) unsigned,
+    dates timestamp not NULL DEFAULT current_timestamp,
+    doit varchar(20) not null
+);
+
+// db4
+// 종목 주식
+// 회사이름, 회사이미지 경로, 회사주식가격, 회사주식 개수,  대표이사, 주소, 모집한 돈
+create table company(
+    company_name varchar(200) not null primary key,
+    company_src varchar(200) not null,
+    company_price bigint(8) unsigned not null,
+    company_count bigint(8) unsigned not null,
+    daepho varchar(10) not null,
+    juso varchar(200) not null,
+    sold_money bigint(8) unsigned not null
+);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('TOSS','/company/toss.png',26750,200,'이승재','서울특별시 서초구 서초대로 398 플래티넘타워 19층',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('MarketKurly','/company/kurly.png',23000,4500,'김슬아','서울 강남구 도산대로16길 20(논현동)',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('Krafton','/company/krafton.png',1850000,50,'김효섭','경기도 성남시 분당구 분당내곡로 117(백현동, 크래프톤타워)',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('KaKaobank','/company/kakaobank.png',65000,4300,'윤호영','제주 제수시 첨단로 242',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('Joonggo','/company/joonggo.png',10500,2500,'이승우','서울특별시 서초구 서초대로 301 동익성봉빌딩 7층',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('Today_house','/company/house.png',4000,3000,'이승재','서울특별시 서초구 서초대로 398 플래티넘타워 19층',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('Beargram','/company/beargram.png',50000,140,'강필규','경일게임아카데미 4층 6강의실',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('FreeDraw','/company/FreeDraw.png',2000,580,'김민수','경일게임아카데미 4층 6강의실',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values('내일은토요일','/company/tomorrowissaturday.png',25000,100,'유경아','경일게임아카데미 4층 6강의실',0);
+insert into company(company_name, company_src, company_price, company_count, daepho, juso, sold_money) values();
+
+// db5
+// 주식 매수 응모
+// 유저이름, 회사 이름, 날짜, 총매수금액
+create table buy(
+    num bigint(8) unsigned not null auto_increment primary key,
+    name varchar(20) not null,
+    company_name varchar(100) not null,
+    dates timestamp not NULL DEFAULT current_timestamp,
+    bought bigint(8) unsigned not null
+);
+
+// db5_2
+// 주식 매수 성공
+// 유저이름, 회사이름, 회사주식가격, 산주식개수, 날짜, 총매수금액
+create table suc(
+    num bigint(8) unsigned not null auto_increment primary key,
+    name varchar(20) not null,
+    company_name varchar(100) not null,
+    price bigint(8) unsigned not null,
+    count bigint(8) unsigned not null,
+    dates timestamp not NULL DEFAULT current_timestamp,
+    bought bigint(8) unsigned not null
+);
+
+// db6
+// 토론
+// 한개 초기 세팅하기
+// 회사이름, 닉네임, 좋아요, 좋아요수
+create table toron(
+    num int(255) primary key auto_increment,
+    company_src varchar(200) not null,
+    name varchar(20) not null,
+    comment varchar(500) not null,
+    imgdata varchar(100) default '/upload/anthalf.png',
+    good int(255) default 0
+)
+insert into toron(company_src, name, comment, imgdata) values('/company/logobox','밍키','트코아서비스 시작합니다!','/upload/anthalf.jpg');
+
+// db7
+// 매도 데이터베이스
+// 번호, 회사이름, 닉네임, 매도가격, 총매도가격, 주식개수, 날짜
+create table solds(
+    num int(255) primary key auto_increment,
+    company_name varchar(100) not null,
+    name varchar(20) not null,
+    sold_price bigint(8) unsigned not null,
+    total_price bigint(8) unsigned not null,
+    count bigint(8) unsigned not null,
+    dates timestamp not NULL DEFAULT current_timestamp
+)
+

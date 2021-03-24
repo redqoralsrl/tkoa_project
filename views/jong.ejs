@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKOA</title>
+    <!-- The King Of Ant -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/354885cafc.js" crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- jQuery -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- 우편번호 -->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@800&display=swap" rel="stylesheet">
+    <!-- start for html of javascript -->
+    <script>
+
+    </script>
+</head>
+<body>
+    <!-- pc recommend mobile -->
+    <div class="left_wrapper">
+        <div class="box"></div>
+        <div class="pc_only">
+            <div class="img_area">
+                <img src="/images/logobox.png" alt="TKOA로고">
+            </div>
+            <div class="img_people">
+                <img src="/images/anthalf.png" alt="ant">
+            </div>
+            <div class="title">
+                비상장주식 거래소<br>첫걸음
+                <p>트코아는<br>비상장 회사의<br>주식을 확보하여<br>주주가 될 수 있게 합니다.</p>
+                <p class="blue">트코아 웹사이트는 모바일 웹 환경으로 구성되었습니다!</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- mobile-area -->
+    <div class="right_wrapper2">
+        <div class="right_title">
+            <div class="log">
+                <% if(logined == false){ %>
+                    <a href="/login" class="logs">로그인</a>
+                    <a href="/register" class="logs">회원가입</a>
+                    <% }else{ %>
+                    <span class="log22"><%= name %>님 환영합니다!</span><br><br>
+                    <a href="/mypage" class="logs">MyPage</a>
+                    <a href="/logout" class="logs">Logout</a>
+                    <% } %>
+            </div>
+            <div class="menubar">
+    
+                <div class="header_menu">
+                    <a href="/"><img src="/images/tkoa.png" alt=""></a>
+                </div>
+                <nav class="gnb_menu">
+                    <a href="/">홈</a>
+                    <a href="/jong">종목탐색</a>
+                    <a href="/gondong">종목토론</a>
+                    <a href="/helper">고객센터</a>
+                </nav>
+            </div>
+        </div>
+        
+        
+        <div class="body_right">
+
+            <!-- 종목탐색 -->
+            <div class="jong">
+                <div class="name_jong">
+                    종목 <%= data.length %>개
+                </div>
+                <!-- <div class="select_jong">
+                    <input type="checkbox" id='popular' checked><p class="no1">인기순</p>
+                    <input type="checkbox" id='name_num'><p class="no2">이름순</p>
+                </div> -->
+                <div class="name_jong_sub">
+                    기업 가치는 공개된 자료를 기반으로 계산한 추정<br>값으로, 실제 기업가치와 차이가 있을 수 있습니다
+                </div>
+            </div>
+            <div class="jong_list">
+                <table>
+                    <% data.forEach((item,index)=>{ %>
+                        <tr>
+                            <td class="jong_td">
+                                <a href="/jong/<%= item.company_name %>">
+                                    <div class="jong_logo">
+                                        <img src="<%= item.company_src %>" alt=""> <%= item.company_name %>
+                                    </div>
+                                    <div class="jong_information">
+                                        <div class="jong_boards"><i class="fas fa-seedling"></i>주식 개수 <%= item.company_count.toLocaleString() %></div>
+                                        <div class="jong_mid">|</div>
+                                        <div class="jong_won"><%= item.company_price.toLocaleString() %> 원(개당)</div>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        </div><!--body_right-->
+
+    </div><!--right_wrapper-->
+
+    <!-- javascript -->
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

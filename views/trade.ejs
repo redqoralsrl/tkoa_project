@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKOA</title>
+    <!-- The King Of Ant -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/354885cafc.js" crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- jQuery -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- 우편번호 -->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@800&display=swap" rel="stylesheet">
+    <!-- start for html of javascript -->
+    <script>
+        $(document).ready(function(){
+            $('.solds').click(function(){
+                // $('.sold_show').toggle();
+                $('.sold_show').slideToggle();
+            })
+
+            $('.click_cancel').click(function(){
+                const data = $('#hidden_data').val();
+                $.ajax({
+                    url: '/trade/cancel/jusick/reload',
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {'data':data},
+                    success: (result) => {
+                        if(result['result']==true){
+                            location.reload();
+                        }
+                    }
+                })
+            })
+
+
+        });
+    </script>
+</head>
+<body>
+    <!-- pc recommend mobile -->
+    <div class="left_wrapper">
+        <div class="box"></div>
+        <div class="pc_only">
+            <div class="img_area">
+                <img src="/images/logobox.png" alt="TKOA로고">
+            </div>
+            <div class="img_people">
+                <img src="/images/anthalf.png" alt="ant">
+            </div>
+            <div class="title">
+                비상장주식 거래소<br>첫걸음
+                <p>트코아는<br>비상장 회사의<br>주식을 확보하여<br>주주가 될 수 있게 합니다.</p>
+                <p class="blue">트코아 웹사이트는 모바일 웹 환경으로 구성되었습니다!</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- mobile-area -->
+    <div class="right_wrapper">
+        <div class="trade_title">
+            <a href="/"><i id="trade_back"class="fas fa-caret-left"></i></a><span>Trade Market</span>
+        </div>
+        <div class="sold_title">
+            <% if(logined == true){ %>
+                <div class="sold_button">
+                    <input type="button" class="solds" value="내 주식">
+                </div>
+                <div class="sold_show">
+                    <div class="sold_sold">보유 주식 List</div>
+                    <% data.forEach((item,index)=>{ %>
+                    <form action="/trade/<%= name %>/<%= item.company_name %>" method="POST">
+                        <div class="sold_boxshows">
+                            <div class="one_sold">
+                                <div class="sold_id">주식 발행증</div>
+                                <div class="sold_left">
+                                    종목 : <span class="bla"><%= item.company_name %></span><br>
+                                    매수 총 금액 : <span class="bla"><%= item.bought.toLocaleString() %>원</span><br>
+                                    클럽딜 가격(1주) : <span class="bla"><%= item.price.toLocaleString() %>원</span><br>
+                                    주식개수 : <span class="bla"><%= item.count.toLocaleString() %>개</span>
+                                </div>
+                            </div>
+                            <div class="two_sold">
+                                <span>주식(개)</span>
+                                <input type="number" name="counts" id="counts" class="sold_input" required><br>
+                            </div> 
+                            <div class="two_sold">
+                                <span>매도가격(개당)</span>
+                                <input type="number" name="wons" id="wons" class="sold_input" required>
+                            </div>
+                            <div class="two_sold2">
+                                <input type="submit" class="count_click" value="Sold">
+                            </div>
+                        </div>
+                    </form>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+        <div class="sold_title_user">
+            <div class="main_sold_title">장외 거래소</div>
+            <div class="char_show">
+                중시 차트
+                <div class="left_char_show">
+                    <div class="char_title"><%= result[0] %></div>
+                    <img src="<%= result[2] %>">
+                </div>
+                <div class="right_char_show">
+                    <div class="char_title"><%= result1[0] %></div>
+                    <img src="<%= result1[2] %>">
+                </div>
+            </div>
+            <div class="search_boxes">
+                <form action="/trade/search/data/base/give" method="POST">
+                    <input type="text" id="s1" name="search">
+                    <input type="submit" id="s2" value="검색">
+                    <a href="/trade"><i class="fas fa-sync-alt"></i></a>
+                </form>
+            </div>
+            <div class="contanier_trade">
+            <% if(search == false){ %>
+                <% market.forEach((item,index)=>{ %>
+                    <form action="/trade/<%= item.num %>" method="POST">
+                    <div class="market_msg">
+                        <div class="inside_msg">
+                            <div class="sold_id">주식발행증</div>
+                            <span class="title_name_user">
+                                판매자 : <%= item.name %>
+                            </span>
+                            종목 : <%= item.company_name %><br>
+                            <span class="title_name_user">
+                                총 매도금액 : <%= item.total_price.toLocaleString() %><br>
+                            </span>
+                            개수 : <%= item.count.toLocaleString() %><br>
+                            가격(1주당) : <%= (item.total_price / item.count).toLocaleString() %>
+                            <% if(name != item.name && logined == true){ %>
+                                <input type="submit" value="Buy">
+                            <% } %>
+                            <% if(name == item.name){ %>
+                                <div class="click_cancel">Cancel</div>
+                                <input type="hidden" name="hidden_data" id="hidden_data" value="<%= item.num %>">
+                            <% } %>
+                        </div>
+                    </div>
+                    </form>
+                <% }) %>
+            <% }else{ %>
+                <% market.forEach((item,index)=>{ %>
+                    <form action="/trade/<%= item.num %>" method="POST">
+                    <div class="market_msg">
+                        <div class="inside_msg">
+                            <div class="sold_id">주식발행증</div>
+                            <span class="title_name_user">
+                                판매자 : <%= item.name %>
+                            </span>
+                            종목 : <%= item.company_name %><br>
+                            <span class="title_name_user">
+                                총 매도금액 : <%= item.total_price.toLocaleString() %><br>
+                            </span>
+                            개수 : <%= item.count.toLocaleString() %><br>
+                            가격(1주당) : <%= (item.total_price / item.count).toLocaleString() %>
+                            <% if(name != item.name && logined == true){ %>
+                                <input type="submit" value="Buy">
+                            <% } %>
+                            <% if(name == item.name){ %>
+                                <div class="click_cancel">Cancel</div>
+                                <input type="hidden" name="hidden_data" id="hidden_data" value="<%= item.num %>">
+                            <% } %>
+                        </div>
+                    </div>
+                    </form>
+                <% }) %>
+            <% } %>
+                
+            </div>
+        </div>
+
+
+
+
+    </div><!--right_wrapper-->
+
+    <!-- socket -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- javascript -->
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

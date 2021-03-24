@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKOA</title>
+    <!-- The King Of Ant -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/354885cafc.js" crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- jQuery -->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- 우편번호 -->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@800&display=swap" rel="stylesheet">
+    <!-- start for html of javascript -->
+    <script>
+        $(document).ready(function(){
+            // $(".open").on('click',function(){
+            //     $(".popup").show();
+            //     $(".dim").show();
+            // });
+            // $(".popup .close").on('click',function(){
+            //     $(this).parent().hide();
+            //     $(".dim").hide();
+            // });
+            $(".open2").on('click',function(){
+                $(".popup2").show();
+                $(".dim2").show();
+            });
+            $(".popup2 .close2").on('click',function(){
+                $(this).parent().hide();
+                $(".dim2").hide();
+            });
+            $(".dim2").on('click',function(){
+                $(".popup2 .close2").parent().hide();
+                $(".dim2").hide();
+            });
+
+            $(".hov-anim").mouseover(function() {
+                $(this).attr("src", $(this).data("animated"))
+            }),
+            $(".hov-anim").mouseout(function() {
+                $(this).attr("src", $(this).data("static"))
+            });
+
+            $('#no_login').on('click',function(){
+                alert('로그인 후 이용하세요!');
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <!-- pc recommend mobile -->
+    <div class="left_wrapper">
+        <div class="box"></div>
+        <div class="pc_only">
+            <div class="img_area">
+                <img src="/images/logobox.png" alt="TKOA로고">
+            </div>
+            <div class="img_people">
+                <img src="/images/anthalf.png" alt="ant">
+            </div>
+            <div class="title">
+                비상장주식 거래소<br>첫걸음
+                <p>트코아는<br>비상장 회사의<br>주식을 확보하여<br>주주가 될 수 있게 합니다.</p>
+                <p class="blue">트코아 웹사이트는 모바일 웹 환경으로 구성되었습니다!</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- mobile-area -->
+    <div class="right_wrapper">
+        
+        <!-- 타이틀 -->
+        <div class="right_title">
+            <div class="log">
+                <% if(logined == false){ %>
+                <a href="/login" class="logs">로그인</a>
+                <a href="/register" class="logs">회원가입</a>
+                <% }else{ %>
+                <span class="log22"><%= name %>님 환영합니다!</span><br><br>
+                <a href="/mypage" class="logs">MyPage</a>
+                <a href="/logout" class="logs">Logout</a>
+                <% } %>
+            </div>
+            <div class="menubar">
+    
+                <div class="header_menu">
+                    <a href="/"><img src="/images/tkoa.png" alt=""></a>
+                </div>
+                <nav class="gnb_menu">
+                    <a href="/">홈</a>
+                    <a href="/jong">종목탐색</a>
+                    <a href="/gondong">종목토론</a>
+                    <a href="/helper">고객센터</a>
+                </nav>
+            </div>
+        </div>
+        
+        
+        <div class="body_right">
+
+
+            <!-- 라이언 주식창 -->
+            <div class="jusikbox">
+                <a href="/jong">
+                    <div class="box1_img">
+                        <img src="/images/chunbuy.jpg" class='hov-anim' data-animated="/images/chunbuy.gif" data-static="/images/chunbuy.jpg">
+                        <p>주식사기</p>
+                    </div>
+                </a>
+                <a href="#tkoa" class="open2">
+                    <div class="box1_img">
+                        <img src="/images/goodlion.jpg" class='hov-anim' data-animated="/images/goodlion.gif" data-static="/images/goodlion.jpg">
+                        <p>트코아란?</p>
+                    </div>
+                </a>
+                <% if(logined == false){ %>
+                    <a id='no_login' href="/">
+                <% }else{ %>
+                    <a href="/chat">
+                <% } %>
+                    <div class="box1_img">
+                        <img src="/images/chunsicklion.jpg" class='hov-anim' data-animated="/images/chunsicklion.gif" data-static="/images/chunsicklion.jpg">
+                        <p>대화하기</p>
+                    </div>
+                </a>
+            </div><!--jusikbox-->
+
+            <!-- 트코아란? 모달창 -->
+            <div class="popup2">
+                <div class="imgsites">
+                    <img src="/images/logobox.png">
+                </div>
+                <div class="boxx">
+                    트코아
+                </div>
+                <div class="text-deco">
+                    쉽고, 안전하게<br>
+                    스타트업 주주를 향한 첫걸음
+                </div>
+                <div class="content_line">
+                    기존의 방식으로는 경제적 목표를 달성하기 어려운 시대, 일부 자산가와<br>
+                    기관 투자자에게만 열려있는 불평등한 기회<br>
+                    <br>
+                    트코아는
+                    자본주의 사회의 주도적 구성원에게<br>
+                    평등하고 혁신적인 경제 활동 방법을 제안합니다.<br>
+                    <br>
+                    전문가와 함께 클럽딜에 참여하고 엔젤리그 조합원이 된다면,<br>
+                    누구나 소액으로 유니콘의 주주가 될 수 있습니다.<br>
+                    <br>
+                    스타트업주식 거래시 고액 투자만 가능한 점, 불법 브로커로 인한 높은<br>
+                    위험성 등의 문제점을 제거한 트코아 서비스는<br>
+                    <br>
+                </div>
+                <div class="text-deco">
+                    쉽고, 안전하고,<br>
+                    유일합니다.
+                </div>
+                <div class="next_log">
+                    <div class="say_log">
+                        우리 함께,<br>
+                        유니콘 스타트업의<br>주주가 되기 위해...
+                    </div>
+                    <div class="log_log">
+                        <div class="content_log">안전성을 높이기 위해 Pre-IPO 단계의<br>스타트업에 집중합니다.</div>
+                        <br>
+                        <div class="story_log">
+                            스타트업의 주주가 되는 것은 투자의 측면에서<br>보았을 때 아주 큰 위험이 따릅니다.<br>
+                            <br>
+                            트코아 조합 출자금은 원금 회수가 보장되지<br> 않습니다.<br>
+                            <br>
+                            트코아는 위험 감소를 위해, 스타트업 중<br>Pre-IPO(기업공개 직전) 단계로<br>
+                            최소한의 안정성을 확보한 회사의 클럽딜을<br>우선으로 운영합니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="next_log2">
+                    <div class="say_log2">
+                        엔젤리그 플랫폼이 안전한<br>거래를 관리합니다.
+                    </div>
+                    <div class="log_log2">
+                        <div class="content_log2">운영사인 (주)트코아가,</div>
+                        <br>
+                        <div class="story_log2">
+                            각 조합의 감사로서 조합을 실시간 관리합니다.<br>
+                            <br>
+                            리드엔젤이 확보한 물량의 매도자를 확인하고,<br>주식 보유 여부를 확인합니다.<br>
+                            <br>
+                            조합의 생성, 규약작성 등의 업무를 지원합니다.<br>
+                            <br>
+                            조합의 명의개서를 지원합니다.<br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="warn_cash">
+                    <div class="warn_box">
+                        <div class="warn_title">
+                            조합지분 현금화
+                        </div>
+                        <div class="warn_body">
+                            기업공개를 통한 증권시장에 상장(IPO)<br>또는 기업인수합병(M&A) 이 일어나면 조합의<br>출자금이 회수될 수 있으며, 조합은 조합원들에게<br>조합재산을 분배하고 해산합니다.<br>
+                            <br>
+                            그 전에 조합 보유 지분을 매수하고자 하는<br>매수자가 있을 경우 조합은 조합원의 합의를<br>통해 보유 지분을 매각할 수도 있습니다
+                        </div>
+                    </div>
+                    <div class="warn_box">
+                        <div class="warn_title">
+                            위험성
+                        </div>
+                        <div class="warn_body">
+                            비상장주식에 대한 투자는 원금을 보장하지<br>
+                            않으므로, 수익을 목적으로 조합에 참여하는 것은<br>
+                            바람직하지 않을 수 있으며, 회사의 상장이나<br>
+                            기업인수합병은 보장되지 않습니다. 또한 비상장주식은<br>
+                            낮은 유동성으로 조합 보유 지분의 매각이 어려울 가능성이 있습니다.
+                        </div>
+                    </div>
+                </div>
+                <a href="" class="close2"><img src="/images/x.jpg"></a>
+            </div>
+            <div class="dim2"></div>
+
+            <!-- 종목토론 -->
+            <div class="torun">
+                <div class="bar_title">
+                    <div class="lefts">
+                        <i class="fas fa-seedling"></i>
+                        <span id='to'>종목토론</span>
+                        <span id='no'>Now</span>
+                    </div>
+                    <div class="rigths">
+                        <a href="/gondong">
+                            <span id="ri">모아보기 ></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="bar_body">
+                    <% toron.forEach((item,index)=>{ %>
+                        <div class="bar_box_ti">
+                            <div class="bar_box_title">
+                                <img src="<%= item.company_src %>.png">
+                                <%= item.name %>
+                            </div>
+                            <div class="bar_box_body">
+                                <%= item.comment %>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <!-- 클럽딜 비상장거래 -->
+            <div class="club_deal">
+                <i class="fas fa-handshake"></i>
+                <span class="say_title">놓치면 언제 또 볼지 몰라...</span>
+                <div class="club_box_deal">
+                    <div class="wh">
+                        <span class="club_deal_list">참여가능 클럽딜</span>
+                    </div>
+                    <div class="wa">
+                        <a href="/jong">
+                            <span id="look">전체보기 ></span>
+                        </a>
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <td>
+                            <a id='link' href="/jong/TOSS">
+                                <div class="club_box">
+                                    <div class="club_imgs">
+                                        <img src="/company/toss.png" alt="">
+                                    </div>
+                                    <div class="club_comment">
+                                        <p class='club_top1'>토스 1호 클럽딜!</p>
+                                        <p class='club_bottom1'> <span>26,750원</span> 모집중!</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a id='link' href="/jong/MarketKurly">
+                                <div class="club_box2">
+                                    <div class="club_imgs2">
+                                        <img src="/company/kurly.png" alt="">
+                                    </div>
+                                    <div class="club_comment">
+                                        <p class='club_top1'>마켓컬리 1호 클럽딜!</p>
+                                        <p class='club_bottom1'> <span>23,000원</span> 모집중!</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 실시간 뉴스 -->
+            <div class="news">
+                <div class="news_title">
+                    <div class="news_name">실시간뉴스</div>
+                    <div class="news_now">Live on</div>
+                </div>
+                <div class="news_live">
+                    <div class="new_live"></div>
+                    <a class="ne" href=<%= data[0].href %> target="_blank"><%= data[0].news %></a><br>
+                    <a class="ne" href=<%= data[1].href %> target="_blank"><%= data[1].news %></a>
+                </div>
+            </div>
+
+            <!-- 마켓영역 -->
+            <div class="market_deal">
+                <a href="/trade">
+                <div class="market_title">장외거래</div>
+                <div class="img_box">
+                    <img src="/images/trades.png">
+                </div>
+                </a>
+            </div>
+
+            <!-- 푸터 -->
+            <div class="footer">
+                <div class="footer_title">TKOA</div>
+                <div class="footer_comment">
+                    엔젤리그 서비스는 매도자와 리드엔젤 혹은 매수자가 자율적으로 협의한 거래에 대하여 조합생성 등 서비스를 제공하는 플랫폼 서비스로, 엔젤리그는 거래를 중개하거나 자문하는 투자중개업 및 투자자문업을 영위하지 않습니다. 따라서 실제 거래에 대한 책임은 계약 당사자 각자에게 있습니다.
+                </div>
+                <div class="footer_sub">
+                    (주)트코아 / 대표이사. 백민기 /<br>email. redqoralsrl@naver.com<br>
+                    주소. 부산광역시 수영구 무학로 / 사업자 등록번호. 111-11-11111 / 통신판매번호. 2020-부산일짱-1111
+                </div>
+            </div>
+        </div><!--body_right-->
+    </div><!--right_wrapper-->
+
+    <!-- javascript -->
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>
